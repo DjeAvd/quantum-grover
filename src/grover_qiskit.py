@@ -17,7 +17,7 @@ target = '11'
 N = 2 ** n_qubits  # Total number of states = 4
 
 # Optimal number of iterations: π/4 * √N
-optimal_iterations = int(np.round(np.pi / 4 * np.sqrt(N)))
+optimal_iterations = 1  # For N=4: peak is at iteration 1
 print(f"Optimal number of iterations: π/4 * √{N} ≈ {optimal_iterations}")
 
 # ORACLE: marks target state by flipping its phase
