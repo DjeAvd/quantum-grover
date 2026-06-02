@@ -1,6 +1,6 @@
 # Grover's Algorithm - Qiskit Implementation
 # Course: MA_HPQC - HES-SO MSE
-# Authors: Djelal Avdyli, Ryan Dorasamy
+# Authors: Djelal Avdil, Ryan Dorasamy
 
 import matplotlib
 matplotlib.use('Agg')

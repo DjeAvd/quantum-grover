@@ -1,8 +1,6 @@
-# =============================================================
 # Grover's Algorithm - Cirq Implementation
 # Course: MA_HPQC - HES-SO MSE
-# Authors: Djelal Avdyli, Ryan Dorasamy
-# =============================================================
+# Authors: Djelal Avdil, Ryan Dorasamy
 
 import matplotlib
 matplotlib.use('Agg')
@@ -12,9 +10,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from collections import Counter
 
-# =============================================================
 # PARAMETERS
-# =============================================================
 n_qubits = 2
 target = '11'
 N = 2 ** n_qubits
@@ -25,25 +21,19 @@ print(f"Grover's Algorithm - Cirq")
 print(f"Target state |{target}⟩, n={n_qubits} qubits, N={N} states")
 print(f"Optimal iterations: {optimal_iterations}")
 
-# =============================================================
 # CREATE QUBITS
 # In Cirq, qubits are explicit objects (unlike Qiskit)
-# =============================================================
 qubits = cirq.LineQubit.range(n_qubits)
 q0, q1 = qubits
 
-# =============================================================
 # STEP 1: UNIFORM SUPERPOSITION
 # Apply Hadamard to all qubits
-# =============================================================
 def create_superposition(qubits):
     return [cirq.H(q) for q in qubits]
 
-# =============================================================
 # STEP 2: ORACLE (Marking phase)
 # Marks target state by flipping its phase
 # For |11⟩: CZ gate directly
-# =============================================================
 def oracle(qubits, target):
     q0, q1 = qubits
     gates = []
@@ -63,11 +53,9 @@ def oracle(qubits, target):
         gates.append(cirq.X(q1))
     return gates
 
-# =============================================================
 # STEP 3: DIFFUSION OPERATOR (Amplifying phase)
 # Implements aᵢ = 2*average - aᵢ
 # H → X → CZ → X → H
-# =============================================================
 def diffusion(qubits):
     q0, q1 = qubits
     return [
@@ -78,9 +66,7 @@ def diffusion(qubits):
         cirq.H(q0), cirq.H(q1),
     ]
 
-# =============================================================
 # SIMULATE PROBABILITY AFTER EACH ITERATION
-# =============================================================
 simulator = cirq.Simulator()
 all_states = ['00', '01', '10', '11']
 prob_history = {state: [] for state in all_states}
@@ -117,9 +103,7 @@ for k in range(1, max_iter + 1):
     for state in all_states:
         print(f"  |{state}⟩: {prob_history[state][-1]:.1%}")
 
-# =============================================================
 # PLOT: probability evolution
-# =============================================================
 iterations = list(range(max_iter + 1))
 colors = {'11': 'green', '00': 'orange', '01': 'steelblue', '10': 'salmon'}
 
@@ -146,9 +130,7 @@ plt.tight_layout()
 plt.savefig('results/grover_cirq_evolution.png', dpi=150)
 print("\nEvolution plot saved to results/grover_cirq_evolution.png")
 
-# =============================================================
 # PRINT FINAL CIRCUIT
-# =============================================================
 circuit_final = cirq.Circuit()
 circuit_final.append(create_superposition(qubits))
 circuit_final.append(oracle(qubits, target))
