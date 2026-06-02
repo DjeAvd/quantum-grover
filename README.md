@@ -3,7 +3,7 @@
 Implémentation de l'algorithme de Grover dans trois environnements de programmation quantique.
 
 ## Auteurs
-- Djelal Avdyli
+- Djelal Avdil
 - Ryan Dorasamy
 
 ## Cours
